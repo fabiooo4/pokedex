@@ -43,7 +43,7 @@
           <div class="modal-box">
             <h3 class="font-bold text-lg">{pokemon.id}  {pokemon.name}</h3>
             <div class="modal-action">
-            <a href="/#" class="btn">Yay!</a>
+            <a href="#pokemonList" class="btn">Yay!</a>
             </div>
           </div>
         </div>
