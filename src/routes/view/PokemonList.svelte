@@ -1,25 +1,8 @@
 <script>
-  let pokemonList = [];
+  import { fetchPokemon } from '../model/pokemons.js';
+  import { pokemonList } from '../model/pokemons.js';
+
   let limit = 100;
-  // let offset = 0;
-  const url = 'https://pokeapi.co/api/v2/pokemon/';
-
-  const fetchPokemon = async (limit) => {
-    for (let pokemonId = 1; pokemonId <= limit; pokemonId++) {
-      await fetch(url + pokemonId)
-        .then(response => response.json())
-        .then(data => {
-          let pokemon = {
-            name: data.name,
-            id: data.id,
-            sprite: data.sprites.other['official-artwork'].front_default,
-          };
-
-          pokemonList.push(pokemon);
-        })
-        .catch(err => console.error(err));
-    }
-  };
 
   let promise = fetchPokemon(limit);
 </script>
