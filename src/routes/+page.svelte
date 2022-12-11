@@ -1,5 +1,5 @@
 <script>
-  import PokemonList from "./view/PokemonList.svelte";
+  import PokemonList from "./view/pokemonList.svelte";
 </script>
 
 <div class="flex flex-col items-center justify-center">

@@ -8,7 +8,7 @@ export const fetchPokemon = async (limit) => {
       .then(response => response.json())
       .then(data => {
         let pokemon = {
-          name: data.name,
+          name: data.name.charAt(0).toUpperCase() + data.name.slice(1),
           id: data.id,
           sprite: data.sprites.other['official-artwork'].front_default,
         };
