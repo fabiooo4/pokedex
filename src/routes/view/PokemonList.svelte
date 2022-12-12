@@ -4,14 +4,14 @@
 
   // Numbers of pokemon to fetch
   //! It must be a mlutiple of 3
-  let limit = 153;
+  let limit = 102;
 
   let promise = fetchPokemon(limit);
 </script>
 
 <!-- Grid -->
 <div class="flex justify-center w-4/5 p-8">
-  <div class="grid lg:grid-cols-3 md:grid-cols-3 sm:grid-cols-2">
+  <div class="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-2">
     {#await promise}
       <!-- Loading spinner -->
       <div class="flex flex-col items-center justify-center col-span-3">
@@ -23,16 +23,16 @@
       {#each pokemonList as pokemon}
         <!-- Pokemon card -->
         <div class="card group bg-base-100 shadow-xl m-4 transition ease-in-out hover:bg-base-300 active:scale-95 duration-150">
-          <a href="#{pokemon.name.toLowerCase()}"> <!-- Link to pokemon popup page -->
-          <div class="absolute justify-start p-4 z-20">
-            <h1 class="font-black text-6xl lg:text-6xl md:text-6xl sm:text-red text-gray-200 group-hover:text-gray-100">#{pokemon.id}</h1>
+          <div class="absolute justify-start p-4 z-0">
+            <h1 class="font-black text-6xl lg:text-6xl md:text-6xl sm:text-red text-gray-200 group-hover:text-gray-100">#{pokemon.id}</h1> 
           </div>
 
-          <figure class="px-10 pt-10 z-30">
+          <a class="z-20" href="#{pokemon.name.toLowerCase()}">
+          <figure class="px-10 pt-10 z-10">
             <img src={pokemon.sprite} alt={pokemon.name} class="rounded-xl" />
           </figure>
 
-          <div class="card-body items-center text-center z-30">
+          <div class="card-body items-center text-center">
             <h2 class="card-title font-black text-3xl">{pokemon.name}</h2>
           </div>
           </a>
