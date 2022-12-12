@@ -34,16 +34,36 @@
 
           <div class="card-body items-center text-center">
             <h2 class="card-title font-black text-3xl">{pokemon.name}</h2>
+            <!-- TODO: Display pokemon types -->
           </div>
           </a>
         </div>
         
         <!-- Pokemon popup page -->
+        <!-- TODO: Display name, id, type, sprite, evolution chain, stats, abilities -->
         <div class="modal" id="{pokemon.name.toLowerCase()}">
           <div class="modal-box">
+
+            <!-- Id, Name -->
             <h3 class="font-bold text-lg">{pokemon.id}  {pokemon.name}</h3>
+
+            <!-- Image -->
+            <img src={pokemon.sprite} alt={pokemon.name} class="rounded-xl" />
+            
+            <!-- Evolution chain -->
+            <div>
+              <h1 class="font-bold text-lg">Evolution chain</h1>
+              <div class="flex flex-row items-center justify-center scale-[0.30]">
+                {#each pokemon.evolutionChain as evolution}
+                  <img src={evolution.sprite} alt={evolution.name} class="rounded" />
+                  <h1 class="font-bold text-lg">{evolution.name}</h1>
+                {/each}
+              </div>
+            </div>
+            
+            <!-- TODO: Close button fixed to page -->
             <div class="modal-action">
-            <a href="#pokemonList" class="btn">Yay!</a>
+            <a href="#pokemonList" class="btn">Close</a>
             </div>
           </div>
         </div>
