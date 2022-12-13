@@ -4,7 +4,7 @@
 
   // Numbers of pokemon to fetch
   //! It must be a mlutiple of 3
-  let limit = 102;
+  let limit = 30;
 
   let promise = fetchPokemon(limit);
 </script>
@@ -42,7 +42,7 @@
         <!-- Pokemon popup page -->
         <!-- TODO: Display name, id, type, sprite, evolution chain, stats, abilities -->
         <div class="modal" id="{pokemon.name.toLowerCase()}">
-          <div class="modal-box">
+          <div class="modal-box [&::-webkit-scrollbar]:hidden">
 
             <!-- Id, Name -->
             <h3 class="font-bold text-lg">{pokemon.id}  {pokemon.name}</h3>
@@ -71,3 +71,7 @@
     {/await}
   </div>
 </div>
+
+<style type="text/css">
+
+</style>
