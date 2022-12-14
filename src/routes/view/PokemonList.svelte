@@ -18,7 +18,7 @@
 <div class="flex justify-center w-4/5 p-8">
   <div class="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-2">
     {#await promise}
-      <!--* Loading spinner -->
+      <!--? Loading spinner -->
       <div class="flex flex-col items-center justify-center col-span-3">
         <div class="flex flex-row items-center justify-center">
           <div class="w-12 h-12 border-dotted border-1 border-t-4 border-indigo-900 rounded-full animate-spin"></div>
@@ -26,7 +26,7 @@
       </div>
     {:then}
       {#each pokemonList as pokemon}
-        <!--* Pokemon card -->
+        <!--? Pokemon card -->
         <div class="card group bg-base-100 shadow-xl m-4 transition ease-in-out hover:bg-base-300 active:scale-95 duration-150">
           <!--! Id -->
           <div class="absolute justify-start p-4 z-0">
@@ -54,12 +54,12 @@
           </a>
         </div>
         
-        <!--* Pokemon popup page -->
+        <!--? Pokemon popup page -->
         <div class="modal" id="{pokemon.name.toLowerCase()}">
           <div class="modal-box [&::-webkit-scrollbar]:hidden overflow-x-hidden">
 
             <!--! Name -->
-            <h3 class="flex justify-center font-extrabold text-6xl p-0">{pokemon.name}</h3>
+            <h3 class="flex justify-center font-extrabold text-6xl mb-2">{pokemon.name}</h3>
 
             <!--! Id -->
             <div class="absolute justify-start p-4 -z-10">
@@ -142,7 +142,7 @@
             <h1 class="flex justify-center font-extrabold text-xl p-2 my-2">Stats</h1>
               <div class="grid content-center h-30 grid-rows-3 grid-cols-10 grid-flow-row ml-36">
                 {#each pokemon.stats as stat}
-                    <h1 class="self-center justify-self-end w-max text-center font-bold text-base col-span-1">{stat.stat.name.charAt(0).toUpperCase() + stat.stat.name.slice(1)}:</h1>
+                    <h1 class="self-center justify-self-end w-max mr-3 lg:mr-0 md:mr-1 sm:mr-3 text-center font-bold text-base col-span-1">{stat.stat.name.charAt(0).toUpperCase() + stat.stat.name.slice(1)}:</h1>
                     <h1 class="self-center justify-self-end w-max text-center font-semibold text-sm col-span-1 px-2">{stat.base_stat}</h1>
                     <div class="self-center col-span-8 rounded-md h-4 w-[{stat.base_stat}%] bg-[{stat.color}]"></div>
                 {/each}
