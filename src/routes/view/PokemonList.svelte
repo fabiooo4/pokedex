@@ -140,17 +140,17 @@
 
             <!--! Stats -->
             <h1 class="flex justify-center font-extrabold text-xl p-2 my-2">Stats</h1>
-              <div class="grid content-center h-30 grid-rows-3 grid-cols-10 grid-flow-row ml-36">
+              <div class="grid content-center grid-rows-3 grid-cols-10 grid-flow-row ml-36">
                 {#each pokemon.stats as stat}
                     <h1 class="self-center justify-self-end w-max mr-3 lg:mr-0 md:mr-1 sm:mr-3 text-center font-bold text-base col-span-1">{stat.stat.name.charAt(0).toUpperCase() + stat.stat.name.slice(1)}:</h1>
                     <h1 class="self-center justify-self-end w-max text-center font-semibold text-sm col-span-1 px-2">{stat.base_stat}</h1>
-                    <div class="self-center col-span-8 rounded-md h-4 w-[{stat.base_stat}%] bg-[{stat.color}]"></div>
+                    <div class="self-center col-span-8 rounded-md h-4 w-[{stat.base_stat/2}%] bg-[{stat.color}]"></div>
                 {/each}
               </div>
             
             <!--! Evolution chain -->
-            <h1 class="flex justify-center font-extrabold text-xl p-2 mt-4">Evolution chain</h1>
             {#if pokemon.evolutionChain.length >= 3}
+              <h1 class="flex justify-center font-extrabold text-xl p-2 mt-4">Evolution chain</h1>
               <div class="flex">
                 <div class="grid gap-x-8 lg:gap-x-10 md:gap-x-10 sm:gap-x-8 grid-rows-5 grid-cols-{pokemon.evolutionChain.length} grid-flow-col">
                   {#each pokemon.evolutionChain as evolution}
@@ -160,6 +160,7 @@
                 </div>
               </div>
             {:else if pokemon.evolutionChain.length ==2}
+              <h1 class="flex justify-center font-extrabold text-xl p-2 mt-4">Evolution chain</h1>
               <div class="flex flex-nowrap">
                 <div class="grid gap-x-10 mx-10 lg:mx-[84px] md:mx-[84px] sm:mx-10 shrink grid-rows-5 grid-cols-{pokemon.evolutionChain.length} grid-flow-col">
                   {#each pokemon.evolutionChain as evolution}
