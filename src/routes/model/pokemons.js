@@ -1,5 +1,5 @@
 export let pokemonList = [];
-let colors = {
+let typeColor = {
   normal: '#A8A878',
   fire: '#F08030',
   water: '#6890F0',
@@ -19,7 +19,17 @@ let colors = {
   dark: '#705848',
   steel: '#B8B8D0'
 }
-// let offset = 0;
+
+let statColor = {
+  hp: '#53d113',
+  attack: '#ebcb33',
+  defense: '#e67420',
+  'special-attack': '#29bbe0',
+  'special-defense': '#4d6dd5',
+  speed: '#d426ce'
+}
+
+
 const url = 'https://pokeapi.co/api/v2/';
 
 export const fetchPokemon = async (limit) => {
@@ -89,20 +99,19 @@ export const fetchPokemon = async (limit) => {
           sprite: data.sprites.other['official-artwork'].front_default,
           abilities: abilities,
           types: data.types,
-          stats: {
-            hp: data.stats[0].base_stat,
-            attack: data.stats[1].base_stat,
-            defense: data.stats[2].base_stat,
-            specialAttack: data.stats[3].base_stat,
-            specialDefense: data.stats[4].base_stat,
-            speed: data.stats[5].base_stat
-          },
+          // Stats array is ordered as follows: hp, attack, defense, special-attack, special-defense, speed
+          stats: data.stats,
           evolutionChain: []
         };
 
-        // Assign colors to types
+        // Assign typeColor to types
         pokemon.types.forEach(type => {
-          type.type.color = colors[type.type.name];
+          type.type.color = typeColor[type.type.name];
+        });
+
+        // Assign statColor to stats
+        pokemon.stats.forEach(stat => {
+          stat.color = statColor[stat.stat.name];
         });
 
         pokemonList.push(pokemon);

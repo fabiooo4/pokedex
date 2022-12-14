@@ -4,20 +4,21 @@
 
   // Numbers of pokemon to fetch
   //! It must be a mlutiple of 3
-  let limit = 151;
+  let limit = 151; // First generation
 
   // Fetch only once
   let promise;
   if (pokemonList.length === 0) {
     promise = fetchPokemon(limit);
   }
+
 </script>
 
-<!-- Grid -->
+<!--* Grid -->
 <div class="flex justify-center w-4/5 p-8">
   <div class="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-2">
     {#await promise}
-      <!-- Loading spinner -->
+      <!--* Loading spinner -->
       <div class="flex flex-col items-center justify-center col-span-3">
         <div class="flex flex-row items-center justify-center">
           <div class="w-12 h-12 border-dotted border-1 border-t-4 border-indigo-900 rounded-full animate-spin"></div>
@@ -25,24 +26,24 @@
       </div>
     {:then}
       {#each pokemonList as pokemon}
-        <!-- Pokemon card -->
+        <!--* Pokemon card -->
         <div class="card group bg-base-100 shadow-xl m-4 transition ease-in-out hover:bg-base-300 active:scale-95 duration-150">
-          <!-- Id -->
+          <!--! Id -->
           <div class="absolute justify-start p-4 z-0">
             <h1 class="font-black text-7xl lg:text-7xl md:text-5xl sm:text-5xl text-gray-200 group-hover:text-gray-100">#{pokemon.id}</h1> 
           </div>
 
           <a class="z-20" href="#{pokemon.name.toLowerCase()}">
           <figure class="px-10 pt-10 z-10">
-            <!-- Image -->
+            <!--! Image -->
             <img src={pokemon.sprite} alt={pokemon.name} class="rounded-xl" />
           </figure>
 
           <div class="card-body items-center text-center">
-            <!-- Name -->
+            <!--! Name -->
             <h2 class="card-title font-black text-3xl">{pokemon.name}</h2>
 
-            <!-- Types -->
+            <!--! Type -->
             <div class="px-6 pt-4 pb-2 flex flex-row">
               {#each pokemon.types as type}
                 <span class="inline-block bg-[{type.type.color}] text-white rounded-full px-3 py-1 text-sm font-semibold mr-2">{type.type.name.charAt(0).toUpperCase() + type.type.name.slice(1)}</span>
@@ -53,26 +54,26 @@
           </a>
         </div>
         
-        <!-- Pokemon popup page -->
+        <!--* Pokemon popup page -->
         <div class="modal" id="{pokemon.name.toLowerCase()}">
           <div class="modal-box [&::-webkit-scrollbar]:hidden overflow-x-hidden">
 
-            <!-- Name -->
+            <!--! Name -->
             <h3 class="flex justify-center font-extrabold text-6xl p-0">{pokemon.name}</h3>
 
-            <!-- Id -->
+            <!--! Id -->
             <div class="absolute justify-start p-4 -z-10">
               <h1 class="font-black text-7xl lg:text-7xl md:text-6xl sm:text-4xl text-gray-200 group-hover:text-gray-100">#{pokemon.id}</h1> 
             </div>
 
-            <!-- Image -->
+            <!--! Image -->
             <div class="flex justify-center">
               <img src={pokemon.sprite} alt={pokemon.name} class="rounded-xl h-1/2 w-1/2" />
             </div>
 
-            <!-- Type -->
+            <!--! Type -->
             <div>
-              <h1 class="flex justify-center font-extrabold text-xl p-2">Types</h1>
+              <h1 class="flex justify-center font-extrabold text-xl p-2">Type</h1>
               <div class="flex justify-center ml-2">
                 {#each pokemon.types as type}
                   <span class="inline-block justify-center bg-[{type.type.color}] text-white rounded-full px-3 py-1 mr-2 text-sm font-semibold">{type.type.name.charAt(0).toUpperCase() + type.type.name.slice(1)}</span>
@@ -81,14 +82,14 @@
             </div>
 
 
-            <!-- Abilities-->
+            <!--! Abilities-->
             <div class="flex justify-center ml-2 grid grid-cols-2 mt-8">
               <h1 class="font-bold text-xl p-2 text-center">Normal Abilities:</h1> 
               <h1 class="font-bold text-xl p-2 text-center">Hidden Abilities:</h1>
               {#each pokemon.abilities as ability}
                 <div class="flex justify-center">
                   
-                  <!-- check if hidden and display in different columns-->
+                  <!-- Chech if hidden-->
                   {#if ability.is_hidden}
 
                     <div class="group cursor-pointer relative inline-block w-24 text-center mr-4">
@@ -137,11 +138,19 @@
               {/each}
             </div>
 
-            <!-- TODO  Stats-->
-
-            <!-- Evolution chain -->
+            <!--! Stats -->
+            <h1 class="flex justify-center font-extrabold text-xl p-2 my-2">Stats</h1>
+              <div class="grid content-center h-30 grid-rows-3 grid-cols-10 grid-flow-row ml-36">
+                {#each pokemon.stats as stat}
+                    <h1 class="self-center justify-self-end w-max text-center font-bold text-base col-span-1">{stat.stat.name.charAt(0).toUpperCase() + stat.stat.name.slice(1)}:</h1>
+                    <h1 class="self-center justify-self-end w-max text-center font-semibold text-sm col-span-1 px-2">{stat.base_stat}</h1>
+                    <div class="self-center col-span-8 rounded-md h-4 w-[{stat.base_stat}%] bg-[{stat.color}]"></div>
+                {/each}
+              </div>
+            
+            <!--! Evolution chain -->
+            <h1 class="flex justify-center font-extrabold text-xl p-2 mt-4">Evolution chain</h1>
             {#if pokemon.evolutionChain.length >= 3}
-              <h1 class="flex justify-center font-extrabold text-xl p-2">Evolution chain</h1>
               <div class="flex">
                 <div class="grid gap-x-8 lg:gap-x-10 md:gap-x-10 sm:gap-x-8 grid-rows-5 grid-cols-{pokemon.evolutionChain.length} grid-flow-col">
                   {#each pokemon.evolutionChain as evolution}
@@ -151,7 +160,6 @@
                 </div>
               </div>
             {:else if pokemon.evolutionChain.length ==2}
-              <h1 class="flex justify-center font-extrabold text-xl p-2">Evolution chain</h1>
               <div class="flex flex-nowrap">
                 <div class="grid gap-x-10 mx-10 lg:mx-[84px] md:mx-[84px] sm:mx-10 shrink grid-rows-5 grid-cols-{pokemon.evolutionChain.length} grid-flow-col">
                   {#each pokemon.evolutionChain as evolution}
