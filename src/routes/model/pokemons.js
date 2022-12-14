@@ -49,7 +49,7 @@ export const fetchPokemon = async (limit) => {
           id: data.id,
           sprite: data.sprites.other['official-artwork'].front_default,
           abilities: data.abilities,
-          type: data.types,
+          types: data.types,
           stats: {
             hp: data.stats[0].base_stat,
             attack: data.stats[1].base_stat,
