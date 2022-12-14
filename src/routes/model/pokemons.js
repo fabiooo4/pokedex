@@ -1,4 +1,24 @@
 export let pokemonList = [];
+let colors = {
+  normal: '#A8A878',
+  fire: '#F08030',
+  water: '#6890F0',
+  electric: '#F8D030',
+  grass: '#78C850',
+  ice: '#98D8D8',
+  fighting: '#C03028',
+  poison: '#A040A0',
+  ground: '#E0C068',
+  flying: '#A890F0',
+  psychic: '#F85888',
+  bug: '#A8B820',
+  rock: '#B8A038',
+  ghost: '#705898',
+  dragon: '#7038F8',
+  fairy: '#EE99AC',
+  dark: '#705848',
+  steel: '#B8B8D0'
+}
 // let offset = 0;
 const url = 'https://pokeapi.co/api/v2/';
 
@@ -44,11 +64,30 @@ export const fetchPokemon = async (limit) => {
           })
           .catch(err => console.error(err));
         
+        // Fetch ability descriptions if language is english and add to pokemon object
+        let abilities = [];
+        data.abilities.forEach(ability => {
+          fetch(ability.ability.url)
+            .then(response => response.json())
+            .then(data => {
+              data.effect_entries.forEach(entry => {
+                if (entry.language.name === 'en') {
+                  abilities.push({
+                    name: ability.ability.name,
+                    description: entry.effect,
+                    is_hidden: ability.is_hidden
+                  });
+                }
+              });
+            })
+            .catch(err => console.error(err));
+        });
+
         let pokemon = {
           name: data.name.charAt(0).toUpperCase() + data.name.slice(1),
           id: data.id,
           sprite: data.sprites.other['official-artwork'].front_default,
-          abilities: data.abilities,
+          abilities: abilities,
           types: data.types,
           stats: {
             hp: data.stats[0].base_stat,
@@ -60,6 +99,11 @@ export const fetchPokemon = async (limit) => {
           },
           evolutionChain: []
         };
+
+        // Assign colors to types
+        pokemon.types.forEach(type => {
+          type.type.color = colors[type.type.name];
+        });
 
         pokemonList.push(pokemon);
       })
