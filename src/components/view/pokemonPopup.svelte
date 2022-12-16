@@ -4,8 +4,8 @@
 
 <!--? Pokemon popup page that closes when clicked away -->
 <input type="checkbox" id="{pokemon.name.toLowerCase()}" class="modal-toggle" />
-<label for="{pokemon.name.toLowerCase()}" class="modal cursor-pointer">
-  <label class="modal-box [&::-webkit-scrollbar]:hidden overflow-x-hidden" for="{pokemon.name.toLowerCase()}">
+<label for="{pokemon.name.toLowerCase()}" class="modal cursor-default">
+  <label class="modal-box [&::-webkit-scrollbar]:hidden overflow-x-hidden relative" for="">
     <label for="{pokemon.name.toLowerCase()}" class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
     
     <!--! Name -->

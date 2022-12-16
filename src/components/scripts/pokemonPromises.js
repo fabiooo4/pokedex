@@ -1,4 +1,8 @@
+// promise.all() for fetching pokemon data in parllel
+
 export let pokemonList = [];
+let promiseList = [];
+const url = 'https://pokeapi.co/api/v2/';
 
 let typeColor = {
   normal: '#A8A878',
@@ -30,10 +34,8 @@ let statColor = {
   speed: '#d426ce'
 }
 
-const url = 'https://pokeapi.co/api/v2/';
 
-export const fetchPokemon = async (limit) => {
-  for (let pokemonId = 1; pokemonId <= limit; pokemonId++) {
+export const fetchPokemon = async (pokemonId) => {
     await fetch(url + "pokemon/" + pokemonId)
       .then(response => response.json())
       .then(data => {
@@ -118,6 +120,13 @@ export const fetchPokemon = async (limit) => {
         pokemonList.push(pokemon);
       })
       .catch(err => console.error(err));
+  };
+
+export const getPromise = async (limit) => {
+  for (let pokemonId = 0; pokemonId < limit; pokemonId++) {
+    let promise = fetchPokemon(pokemonId + 1);
+    promiseList.push(promise);
   }
-  console.log(pokemonList);
-};
+  
+  return Promise.all(promiseList).then(() => {});
+}

@@ -1,20 +1,29 @@
 <script>
-  import { fetchPokemon } from '../components/scripts/pokemons.js';
-  import { pokemonList } from '../components/scripts/pokemons.js';
+  // import { fetchPokemon } from '../components/scripts/pokemons.js';
+  // import { pokemonList } from '../components/scripts/pokemons.js';
+  import { onMount } from 'svelte';
+  import { getPromise } from '../components/scripts/pokemonPromises.js';
+  import { pokemonList } from '../components/scripts/pokemonPromises.js';
   import LoadingSpinner from '../components/view/loadingSpinner.svelte';
   import PokemonCard from '../components/view/pokemonCard.svelte';
   import PokemonPopup from '../components/view/pokemonPopup.svelte';
 
-  // Numbers of pokemon to fetch
-  //! It must be a mlutiple of 3
-  let limit = 151; // First generation
+  // // Numbers of pokemon to fetch
+  // //! It must be a mlutiple of 3
+  let limit = 500; // First generation
+
+  // // Fetch only once
+  // let promise;
+  // if (pokemonList.length === 0) {
+  //   promise = fetchPokemon(limit);
+  // }
 
   // Fetch only once
   let promise;
   if (pokemonList.length === 0) {
-    promise = fetchPokemon(limit);
+    promise = getPromise(limit);
+    console.log(pokemonList);
   }
-
 </script>
 
 <!--? Grid -->
@@ -27,6 +36,8 @@
         <PokemonCard pokemon = {pokemon} />
         <PokemonPopup pokemon = {pokemon} />
       {/each}
+    {:catch error}
+      <div class="text-red-500">{error.message}</div>
     {/await}
   </div>
 </div>

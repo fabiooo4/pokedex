@@ -2,9 +2,8 @@
   export let pokemon;
 </script>
 
-<div class="card group bg-base-100 shadow-xl m-4 transition ease-in-out hover:bg-base-300 active:scale-95 duration-150">
-  <label for="{pokemon.name.toLowerCase()}">
-    
+<div class="card cursor-pointer group bg-base-100 shadow-xl m-4 transition ease-in-out hover:bg-base-300 active:scale-95 duration-150">
+  <label for="{pokemon.name.toLowerCase()}">    
     <!--! Id -->
     <div class="absolute justify-start p-4 z-10">
       <h1 class="font-black text-7xl lg:text-7xl md:text-5xl sm:text-5xl text-gray-200 group-hover:text-gray-100">#{pokemon.id}</h1> 
