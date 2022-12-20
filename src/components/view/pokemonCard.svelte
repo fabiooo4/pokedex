@@ -21,7 +21,7 @@
       <!--! Type -->
       <div class="px-6 pt-4 pb-2 flex flex-row">
         {#each pokemon.types as type}
-          <span class="inline-block bg-[{type.type.color}] text-white rounded-full px-3 py-1 text-sm font-semibold mr-2">{type.type.name.charAt(0).toUpperCase() + type.type.name.slice(1)}</span>
+          <div class="badge bg-[{type.type.color}] text-white px-3 py-4 text-sm font-semibold mr-2 rounded-full border-0">{type.type.name.charAt(0).toUpperCase() + type.type.name.slice(1)}</div>
         {/each}
       </div>
     </div>

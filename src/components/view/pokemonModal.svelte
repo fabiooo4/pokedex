@@ -28,7 +28,7 @@
       <h1 class="flex justify-center font-extrabold text-xl p-2">Type</h1>
       <div class="flex justify-center ml-2">
         {#each pokemon.types as type}
-          <span class="inline-block justify-center bg-[{type.type.color}] text-white rounded-full px-3 py-1 mr-2 text-sm font-semibold">{type.type.name.charAt(0).toUpperCase() + type.type.name.slice(1)}</span>
+          <div class="badge bg-[{type.type.color}] text-white px-3 py-4 text-sm font-semibold mr-2 rounded-full border-0">{type.type.name.charAt(0).toUpperCase() + type.type.name.slice(1)}</div>
         {/each}
       </div>
     </div>
@@ -43,17 +43,15 @@
           
           <!-- Chech if hidden-->
           {#if ability.is_hidden}
-
             <div class="group cursor-pointer relative inline-block w-24 text-center mr-4">
               <!-- Ability name -->
-              <span class="inline-block w-max justify-center bg-gray-200 text-black rounded-full px-3 py-1 mt-2 text-sm font-semibold">{ability.name.charAt(0).toUpperCase() + ability.name.slice(1)}
-              
+              <div class="badge bg-gray-200 text-black px-3 py-4 text-sm font-semibold mr-2 rounded-full border-0">{ability.name.charAt(0).toUpperCase() + ability.name.slice(1)}
+                
                 <!-- Info icon -->
-                <svg class="inline-block w-4 h-4 mb-1" fill="none" stroke="black" viewBox="0 0 24 24">
+                <svg class="inline-block w-4 h-4 ml-1" fill="none" stroke="black" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                 </svg>
-              </span>
-              
+              </div>
 
               <div class="opacity-0 transition-opacity duration-300 w-52 bg-black text-white text-center text-xs rounded-lg py-2 absolute z-10 group-hover:opacity-100 bottom-full -left-1/2 px-3 pointer-events-none">
                 
@@ -63,19 +61,18 @@
                 <svg class="absolute text-black h-2 w-full left-0 top-full" x="0px" y="0px" viewBox="0 0 255 255" xml:space="preserve"><polygon class="fill-current" points="0,0 127.5,127.5 255,0"/></svg>
               </div>
             </div>
-
           {:else}
           
             <div class="group cursor-pointer relative inline-block w-24 text-center mr-4">
               <!-- Ability name -->
-              <span class="inline-block w-max justify-center bg-gray-200 text-black rounded-full px-3 py-1 mt-2 text-sm font-semibold">{ability.name.charAt(0).toUpperCase() + ability.name.slice(1)}
-              
+              <div class="badge bg-gray-200 text-black px-3 py-4 text-sm font-semibold mr-2 rounded-full border-0">{ability.name.charAt(0).toUpperCase() + ability.name.slice(1)}
+                
                 <!-- Info icon -->
-                <svg class="inline-block w-4 h-4 mb-1" fill="none" stroke="black" viewBox="0 0 24 24">
+                <svg class="inline-block w-4 h-4 ml-1" fill="none" stroke="black" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                 </svg>
-              </span>
-              
+              </div>
+
               <div class="opacity-0 transition-opacity duration-300 w-52 bg-black text-white text-center text-xs rounded-lg py-2 absolute z-10 group-hover:opacity-100 bottom-full -left-1/2 px-3 pointer-events-none">
                 
                 <p>{ability.description}</p>
@@ -83,7 +80,7 @@
                 <!-- Tooltip arrow -->
                 <svg class="absolute text-black h-2 w-full left-0 top-full" x="0px" y="0px" viewBox="0 0 255 255" xml:space="preserve"><polygon class="fill-current" points="0,0 127.5,127.5 255,0"/></svg>
               </div>
-            </div>  
+            </div>
 
           {/if}                  
         </div>

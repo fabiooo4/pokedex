@@ -23,6 +23,7 @@
 <!-- TODO Search bar -->
 
 
+
 <!--? Grid -->
 <div class="flex justify-center w-3/4 p-8">
   <div class="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-2">
