@@ -1,7 +1,7 @@
 <script>
+	import PokemonModal from './../components/view/pokemonModal.svelte';
   // import { fetchPokemon } from '../components/scripts/pokemons.js';
   // import { pokemonList } from '../components/scripts/pokemons.js';
-  import { onMount } from 'svelte';
   import { getPromise } from '../components/scripts/pokemonPromises.js';
   import { pokemonList } from '../components/scripts/pokemonPromises.js';
   import LoadingSpinner from '../components/view/loadingSpinner.svelte';
@@ -10,13 +10,7 @@
 
   // // Numbers of pokemon to fetch
   // //! It must be a mlutiple of 3
-  let limit = 500; // First generation
-
-  // // Fetch only once
-  // let promise;
-  // if (pokemonList.length === 0) {
-  //   promise = fetchPokemon(limit);
-  // }
+  let limit = 3; // First generation
 
   // Fetch only once
   let promise;
@@ -34,7 +28,7 @@
     {:then}
       {#each pokemonList as pokemon}
         <PokemonCard pokemon = {pokemon} />
-        <PokemonPopup pokemon = {pokemon} />
+        <PokemonModal pokemon = {pokemon} />
       {/each}
     {:catch error}
       <div class="text-red-500">{error.message}</div>

@@ -5,6 +5,10 @@
 
 <div class="modal modal-bottom sm:modal-middle" id="{pokemon.name.toLowerCase()}">
   <div class="modal-box [&::-webkit-scrollbar]:hidden overflow-x-hidden">
+    <!--! Close button -->
+    <div class="modal-action">
+      <a href="#pokemonList" class="btn btn-sm btn-circle absolute right-2 top-2">✕</a>
+    </div>
 
     <!--! Name -->
     <h3 class="flex justify-center font-extrabold text-6xl mb-2">{pokemon.name}</h3>
@@ -118,9 +122,5 @@
         </div>
       </div>
     {/if}
-    
-    <div class="modal-action">
-    <a href="#pokemonList" class="btn">Close</a>
-    </div>
   </div>
 </div>
