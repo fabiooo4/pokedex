@@ -1,4 +1,7 @@
-export let pokemonList = [];
+import { pokemons } from "./store";
+
+let pokemonList = [];
+
 let typeColor = {
   normal: '#A8A878',
   fire: '#F08030',
@@ -28,7 +31,6 @@ let statColor = {
   'special-defense': '#4d6dd5',
   speed: '#d426ce'
 }
-
 
 const url = 'https://pokeapi.co/api/v2/';
 
@@ -118,5 +120,5 @@ export const fetchPokemon = async (limit) => {
       })
       .catch(err => console.error(err));
   }
-  console.log(pokemonList);
+  pokemons.set(pokemonList);
 };

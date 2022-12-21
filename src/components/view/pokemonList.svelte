@@ -1,27 +1,48 @@
 <script>
-  import { fetchPokemon } from '../scripts/pokemons.js';
-  import { pokemonList } from '../scripts/pokemons.js';
   import LoadingSpinner from './loadingSpinner.svelte';
   import PokemonCard from './pokemonCard.svelte';
   import PokemonModal from './pokemonModal.svelte';
+  import SearchBar from './searchBar.svelte';
 
+  import { fetchPokemon } from '../scripts/pokemons.js';
+  import { pokemons } from '../scripts/store.js';
+  import { filteredPokemons } from '../scripts/store.js';
+  
   // Numbers of pokemon to fetch
   //! It must be a mlutiple of 3
   let limit = 151; // First generation
 
-  // Fetch only once
-  let promise;
-  if (pokemonList.length === 0) {
-    promise = fetchPokemon(limit);
-  }
 
+  // Fetch only once
+  let pokemonList;
+  let filteredPokemonList;
+  let isSearching = false;
+  let promise;
+
+  if (pokemons !== 0) {
+    promise = Promise.resolve(fetchPokemon(limit)).then(() => {
+      pokemons.subscribe(value => {
+        pokemonList = value;
+      });
+
+      filteredPokemons.set(pokemonList);
+      filteredPokemons.subscribe(value => {
+        filteredPokemonList = value;
+      });
+
+      isSearching = true;
+      console.log(pokemonList);
+
+      return pokemonList;
+    });
+  }
 </script>
 
 <!--? Title -->
 <h1 class="font-extrabold text-7xl lg:text-9xl md:text-8xl sm:text-7xl m-5">Pokédex</h1>
 
-<!-- TODO Search bar -->
-
+<!--? Search bar -->
+<SearchBar isSearching = {isSearching}/>
 
 
 <!--? Grid -->
@@ -30,7 +51,7 @@
     {#await promise}
       <LoadingSpinner />
     {:then}
-      {#each pokemonList as pokemon}
+      {#each filteredPokemonList as pokemon}
         <PokemonCard pokemon = {pokemon} />
         <PokemonModal pokemon = {pokemon} />
       {/each}
