@@ -1,4 +1,6 @@
-export let pokemonList = [];
+import { pokemons } from "./store";
+
+let pokemonList = [];
 
 let typeColor = {
   normal: '#A8A878',
@@ -118,5 +120,5 @@ export const fetchPokemon = async (limit) => {
       })
       .catch(err => console.error(err));
   }
-  console.log(pokemonList);
+  pokemons.set(pokemonList);
 };
