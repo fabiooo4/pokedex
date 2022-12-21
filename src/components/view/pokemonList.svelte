@@ -9,27 +9,50 @@
   //! It must be a mlutiple of 3
   let limit = 151; // First generation
 
+  let filteredPokemonList = [];
   // Fetch only once
   let promise;
   if (pokemonList.length === 0) {
-    promise = Promise.resolve(fetchPokemon(limit));
+    promise = Promise.resolve(fetchPokemon(limit)).then(() => {
+      filteredPokemonList = pokemonList;
+      isSearching = true;
+      return pokemonList;
+    });
   }
 
-  $: search = '';
-  $: filteredPokemonList = pokemonList.filter(pokemon => {
+  let search = '';
+  let isSearching = false;
+
+  const handleSearch = () => {
     if (search !== '') {
-      return pokemon.name.includes(search.toLocaleLowerCase());
+        filteredPokemonList = pokemonList.filter(pokemon => {
+          return pokemon.name.toLowerCase().includes(search.toLowerCase());
+      });
     } else {
-      return pokemonList;
+      filteredPokemonList = pokemonList;
     }
-  });
+  }
 </script>
 
 <!--? Title -->
 <h1 class="font-extrabold text-7xl lg:text-9xl md:text-8xl sm:text-7xl m-5">Pokédex</h1>
 
 <!-- TODO Search bar -->
-<input type="text" placeholder="Search" class="input w-full max-w-xs" bind:value={search}/>
+<div class="form-control">
+  <div class="input-group">
+    {#if isSearching}
+      <input type="text" placeholder="Search…" class="input input-bordered" bind:value="{search}" />
+      <button class="btn btn-square" on:click={handleSearch}>
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
+      </button>
+    {:else}
+      <input placeholder="Search…" class="input input-bordered" disabled />
+      <button class="btn btn-square" disabled>
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
+      </button>
+    {/if}
+  </div>
+</div>
 
 <!--? Grid -->
 <div class="flex justify-center w-3/4 p-8">
